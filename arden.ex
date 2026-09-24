@@ -1,5 +1,4 @@
 
-# there should probably be some sort of verification here
 [oldFile, newFile] = case System.argv() do
   [oldFile, newFile] ->
     [oldFile, newFile]
