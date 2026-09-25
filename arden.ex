@@ -31,9 +31,18 @@ newFileLength = read_file_contents.(newFile)
 
 difference = newFileLength - oldFileLength
 
+average_old_line_length = String.length(old_contents) / oldFileLength
+average_new_line_length = String.length(new_contents) / newFileLength
 
-if difference < 0 do
-  IO.puts("Your generated file is somehow shorter than the original by #{abs(difference)} lines.")
-else
-  IO.puts("Your generated file is #{difference} lines longer than the original.")
+cond do
+  difference < 0 ->
+    IO.puts("Your generated file is somehow shorter than the original by #{abs(difference)} lines.")
+
+  difference == 0 ->
+    IO.puts("You broke even in raw line counts. That's quite rare, but it's fine.")
+    IO.puts("The average line length went from #{average_old_line_length} to #{average_new_line_length}")
+
+  true ->
+    IO.puts("Your generated file is #{difference} lines longer than the original.")
+    IO.puts("In addition, The average line length went from #{average_old_line_length} to #{average_new_line_length}")
 end
